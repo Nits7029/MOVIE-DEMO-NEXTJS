@@ -1,0 +1,61 @@
+.sign_in_wrap .sign-in-box {
+  width: 300px;
+  height: 360px;
+}
+.sign_in_wrap .form-check-label {
+  margin-left: 8px;
+  font-weight: 300 !important;
+}
+.sign_in_wrap .checkbox {
+  gap: 4px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  margin-top: 10px;
+}
+.sign_in_wrap .checkbox input {
+  position: absolute;
+  width: 0;
+  left: 50px;
+  height: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.sign_in_wrap .checkbox .checkmark {
+  position: relative;
+  display: block;
+  top: 0;
+  left: 0;
+  width: 18px;
+  height: 17px;
+  border-radius: 3px;
+  background: #224957;
+  outline: 1px solid #224957;
+  transition: all 0.2s ease;
+}
+.sign_in_wrap .checkbox .checkmark::after {
+  position: absolute;
+  display: block;
+  content: "";
+  left: 50%;
+  top: 40%;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: translate(-50%, -50%) rotate(45deg);
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+.sign_in_wrap .checkbox:hover .checkmark {
+  background: #224957;
+  transition: all 0.2s ease;
+}
+.sign_in_wrap .checkbox input:checked ~ .checkmark {
+  background: #224957;
+  outline: 1px solid #224957;
+}
+.sign_in_wrap .checkbox input:checked ~ .checkmark::after {
+  opacity: 1;
+  transition: all 0.2s ease;
+}

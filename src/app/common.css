@@ -1,0 +1,248 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+p {
+  margin: 0 !important;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+
+.container {
+  max-width: 1550px !important;
+}
+@media (max-width: 1440px) {
+  .container {
+    max-width: 1350px !important;
+  }
+}
+@media (max-width: 1024px) {
+  .container {
+    max-width: 1000px !important;
+  }
+}
+
+.fs-48 {
+  font-size: 48px !important;
+}
+@media (max-width: 768px) {
+  .fs-48 {
+    font-size: 35px !important;
+    line-height: 40px;
+  }
+}
+
+.mt-40 {
+  margin-top: 40px;
+}
+
+.mt-24 {
+  margin-top: 24px;
+}
+
+.mb-24 {
+  margin-bottom: 24px;
+}
+
+.mt-27 {
+  margin-top: 27px;
+}
+
+.mt-64 {
+  margin-top: 64px;
+}
+
+.w-216 {
+  width: 216px !important;
+}
+
+.w-362 {
+  width: 362px !important;
+}
+
+
+.fw-700 {
+  font-weight: 700 !important;
+}
+
+.fs-14 {
+  font-size: 14px !important;
+}
+
+.big-title {
+  text-align: center;
+  color: white;
+  font-size: 64px;
+  font-weight: 600;
+  line-height: 69px;
+  word-wrap: break-word;
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  .big-title {
+    font-size: 35px;
+    line-height: 50px;
+  }
+}
+
+.green-btn {
+  width: auto;
+  height: 54px;
+  padding: 15px 28px;
+  background: #2BD17E;
+  border-radius: 10px;
+  text-align: center;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  line-height: 24px;
+  word-wrap: break-word;
+  cursor: pointer;
+}
+
+.link-btn {
+
+text-decoration: none;
+}
+
+.cancel-btn {
+  width: auto;
+  height: 54px;
+  padding: 15px 28px;
+  border-radius: 10px;
+  border: 1px solid #FFF;
+  background-color: transparent;
+  text-align: center;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  word-wrap: break-word;
+}
+
+.movies-page .green-btn {
+  max-width: 202px;
+  margin: 40px auto 0;
+}
+
+.background-screen {
+  background: #093545;
+  height: 100vh;
+  width: 100%;
+}
+.background-screen::after {
+  background-image: url("/assets/images/bg-bottom-vector.png");
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 111px !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.bg-screen {
+  background: #093545;
+  height: 100%;
+  width: 100%;
+}
+.bg-screen::after {
+  background-image: url("/assets/Images/bg-bottom-vector.png");
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 111px !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-top: 109px;
+}
+
+.bg-input-box {
+  height: 45px;
+  border: none !important;
+  background: #224957;
+  border-radius: 10px;
+  color: #fff !important;
+  padding: 11px 16px !important;
+  font-weight: 300 !important;
+  background-color: #224957;
+  font-size: 14px;
+  cursor: pointer;
+}
+.bg-input-box::-moz-placeholder {
+  color: #fff !important;
+}
+.bg-input-box::placeholder {
+  color: #fff !important;
+}
+.bg-input-box:focus {
+  box-shadow: none;
+  background-color: #224957;
+}
+
+/* pagination */
+.pagination {
+  display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.page-link  {
+  background-color: transparent !important;
+  font-weight: 700 !important;
+  font-size: 16px !important;
+  color: #fff !important;
+  border: none !important;
+  margin: 120px 0 !important;
+}
+.page-item.active  {
+  background:  #2BD17E !important;
+
+}
+.page-item {
+  border-radius: 4px !important;
+  width: 32px !important;
+height: 32px;
+background-color: #092C39 !important;
+display: flex !important;
+align-items: center !important;
+justify-content: center !important;
+}
+.page-next-item {
+  margin-left: 16px;
+}
+.page-prev-item {
+  margin-right: 16px;
+}
+.dropzone {
+      border: 1px dashed #fff;
+      border-radius: 10px;
+    width: 480px;
+}
+.dz-message {
+  height: 380px;
+}
+.dropzone-content-custom {
+  display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 350px;
+      color: #fff ;
+      flex-direction: column;
+      width: 490px;
+
+}
+.dz-message h5 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 350px;
+}

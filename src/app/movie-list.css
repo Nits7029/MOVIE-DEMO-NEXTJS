@@ -1,0 +1,38 @@
+.movie-list {
+  padding: 120px 0 0 0;
+}
+@media (max-width: 768px) {
+  .movie-list {
+    padding: 30px 0 0 0;
+  }
+}
+.movie-list .movie-list-box {
+  padding-bottom: 120px;
+}
+@media (max-width: 768px) {
+  .movie-list .movie-list-box {
+    padding-bottom: 30px;
+  }
+}
+.movie-list .movie-list-box .drop-img-col {
+  padding: 8px 8px 16px 8px;
+  background-color: #092C39 !important;
+  border-radius: 15px;
+}
+.movie-list .movie-list-box .drop-img-col img {
+  border-radius: 12px;
+}
+.movie-list .movie-list-box .drop-img-col .drop-img-content {
+  padding: 16px 8px 8px 8px;
+}
+.movie-list .movie-list-box .add-circle-icon {
+  margin-left: 12px;
+}
+.movie-list .movie-list-box .movie-list-col {
+  margin-top: 132px;
+}
+@media (max-width: 768px) {
+  .movie-list .movie-list-box .movie-list-col {
+    margin-top: 20px;
+  }
+}
