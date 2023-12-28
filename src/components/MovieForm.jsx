@@ -11,7 +11,7 @@ import { FormValidationMessages } from '@/constants/form-const';
 import toast from 'react-hot-toast'
 import DropZone from 'react-dropzone'
 
-export default function MovieForm(operation, editData) {
+export default function MovieForm({ operation, editData }) {
 
   const [loading, setLoading] = useState(false)
   const [selectedFiles, setSelectedFiles] = useState([]);

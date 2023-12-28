@@ -5,9 +5,10 @@ import MovieForm from '@/components/MovieForm';
 
 export default function MovieUpdate() {
 
+
   return (
     <MovieForm
-      operation="update"
+      operation="edit"
     />
   )
 
