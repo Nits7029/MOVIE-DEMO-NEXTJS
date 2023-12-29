@@ -61,14 +61,14 @@ export default function MovieList() {
                       <p className="big-title fs-48 text-start">My movies</p>
                       <div className="add-circle-icon">
                         <Link href="/movies/create" className="text-decoration-none">
-                          <img src="assets/Images/add_circle_outline_black_.svg" alt="err" className="" />
+                          <img src="assets/images/add_circle_outline_black_.svg" alt="err" className="" />
                         </Link>
                       </div>
                     </div>
                     <div className="d-flex align-items-center cursor-pointer" onClick={handleLogout}>
                       <p className="text-white fw-700 ">Logout</p>
                       <div className="add-circle-icon">
-                        <img src="assets/Images/logout_black.svg" alt="err" />
+                        <img src="assets/images/logout_black.svg" alt="err" />
                       </div>
                     </div>
                   </div>
@@ -78,7 +78,7 @@ export default function MovieList() {
                         <Link href={`/movies/update/${movie?._id}`} className="text-decoration-none">
                           <div className="drop-img-col text-white">
                             <div className="drop-img-wrap">
-                              <img src={movie?.poster ? `uploads/${movie?.poster}` : "assets/Images/movie-list-img.png"} alt="err"
+                              <img src={movie?.poster ? `uploads/${movie?.poster}` : "assets/images/movie-list-img.png"} alt="err"
                                 className="w-100 img-fluid object-fit-cover" />
                             </div>
                             <div className="drop-img-content">

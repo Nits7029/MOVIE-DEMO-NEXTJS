@@ -156,7 +156,7 @@ text-decoration: none;
   width: 100%;
 }
 .bg-screen::after {
-  background-image: url("/assets/Images/bg-bottom-vector.png");
+  background-image: url("/assets/images/bg-bottom-vector.png");
   content: "";
   position: absolute;
   bottom: 0;

@@ -75,60 +75,58 @@ export default function SignIn() {
     <div className="bg_red sign_in_wrap background-screen position-relative d-flex align-items-center justify-content-center">
       <div className="sign-in-box">
         <div className="big-title">Sign in</div>
-        <Form action="#">
-          <div className="mt-40">
-            <Input
-              placeholder="Email"
-              name="email"
-              type="email"
-              className="form-control bg-input-box"
-              autoFocus={false}
-              onChange={validation.handleChange}
-              onBlur={validation.handleBlur}
-              value={validation.values.email || ""}
-              invalid={
-                validation.touched.email && validation.errors.email ? true : false
-              }
-            />
-            {validation.touched.email && validation.errors.email ? (
-              <FormFeedback type="invalid">{validation.errors.email}</FormFeedback>
-            ) : null}
-          </div>
-          <div className="mt-24 mb-24">
-            <Input
-              placeholder="Password"
-              name="password"
-              type="password"
-              className="form-control bg-input-box"
-              autoFocus={false}
-              onChange={validation.handleChange}
-              onBlur={validation.handleBlur}
-              value={validation.values.password || ""}
-              invalid={
-                validation.touched.password && validation.errors.password ? true : false
-              }
-            />
-            {validation.touched.password && validation.errors.password ? (
-              <FormFeedback type="invalid">{validation.errors.password}</FormFeedback>
-            ) : null}
-          </div>
-          <label className="checkbox w-100 text-center d-flex justify-content-center" htmlFor="remember-me">
-            <Input
-              className="form-check-input"
-              type="checkbox"
-              name="color"
-              onChange={(e) => setRememberMe(e.target.checked)}
-              id="remember-me"
-            />
-            <span className="checkmark"></span>
-            <div className="form-check-label text-center text-white">Remember me</div>
-          </label>
-          <div>
-            <button type="submit" className="green-btn mt-27 w-100" onClick={() => validation.handleSubmit()} disabled={loading}>
-              {loading ? (<><Spinner size="sm" className="me-2" />Loading...</>) : "Login"}
-            </button>
-          </div>
-        </Form>
+        <div className="mt-40">
+          <Input
+            placeholder="Email"
+            name="email"
+            type="email"
+            className="form-control bg-input-box"
+            autoFocus={false}
+            onChange={validation.handleChange}
+            onBlur={validation.handleBlur}
+            value={validation.values.email || ""}
+            invalid={
+              validation.touched.email && validation.errors.email ? true : false
+            }
+          />
+          {validation.touched.email && validation.errors.email ? (
+            <FormFeedback type="invalid">{validation.errors.email}</FormFeedback>
+          ) : null}
+        </div>
+        <div className="mt-24 mb-24">
+          <Input
+            placeholder="Password"
+            name="password"
+            type="password"
+            className="form-control bg-input-box"
+            autoFocus={false}
+            onChange={validation.handleChange}
+            onBlur={validation.handleBlur}
+            value={validation.values.password || ""}
+            invalid={
+              validation.touched.password && validation.errors.password ? true : false
+            }
+          />
+          {validation.touched.password && validation.errors.password ? (
+            <FormFeedback type="invalid">{validation.errors.password}</FormFeedback>
+          ) : null}
+        </div>
+        <label className="checkbox w-100 text-center d-flex justify-content-center" htmlFor="remember-me">
+          <Input
+            className="form-check-input"
+            type="checkbox"
+            name="color"
+            onChange={(e) => setRememberMe(e.target.checked)}
+            id="remember-me"
+          />
+          <span className="checkmark"></span>
+          <div className="form-check-label text-center text-white">Remember me</div>
+        </label>
+        <div>
+          <button type="submit" className="green-btn mt-27 w-100" onClick={() => validation.handleSubmit()} disabled={loading}>
+            {loading ? (<><Spinner size="sm" className="me-2" />Loading...</>) : "Login"}
+          </button>
+        </div>
       </div>
     </div>
   )

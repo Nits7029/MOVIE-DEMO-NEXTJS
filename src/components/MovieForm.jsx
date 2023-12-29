@@ -102,7 +102,7 @@ export default function MovieForm({ operation, editData }) {
                   <XCircle size={32} onClick={() => { setSelectedFile(''); setImage('') }} />
                 </div>
                 <div className="dropzone-img-wrap">
-                  <img src={selectedFile ? selectedFile : image ? `/uploads/${image}` : "/assets/Images/movie-list-img.png"} alt="err"
+                  <img src={selectedFile ? selectedFile : image ? `/uploads/${image}` : "/assets/images/movie-list-img.png"} alt="err"
                     className="w-100 img-fluid object-fit-cover" />
                 </div>
               </div>
