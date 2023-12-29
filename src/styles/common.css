@@ -16,8 +16,9 @@ p {
 .container {
   max-width: 1550px !important;
 }
-@media (max-width: 1440px) {
+@media (max-width: 1600px) {
   .container {
+    padding: 0 50px;
     max-width: 1350px !important;
   }
 }
@@ -132,9 +133,10 @@ text-decoration: none;
 }
 
 .background-screen {
-  background: #093545;
-  height: 100vh;
-  width: 100%;
+    background: #093545;
+    width: 100%;
+    min-height: 970px;
+    height: 100vh;
 }
 .background-screen::after {
   background-image: url("/assets/images/bg-bottom-vector.png");
@@ -205,16 +207,23 @@ text-decoration: none;
 }
 .page-item.active  {
   background:  #2BD17E !important;
-
 }
 .page-item {
   border-radius: 4px !important;
   width: 32px !important;
-height: 32px;
-background-color: #092C39 !important;
-display: flex !important;
-align-items: center !important;
-justify-content: center !important;
+  height: 32px;
+  background-color: #092C39 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-left: 8px;
+}
+.page-link:focus-visible {
+  box-shadow: none !important;
+  outline: none !important;
+}
+.page-item:first-child {
+  margin-left: 0;
 }
 .page-next-item {
   margin-left: 16px;
@@ -222,14 +231,21 @@ justify-content: center !important;
 .page-prev-item {
   margin-right: 16px;
 }
+
 .dropzone {
-      border: 1px dashed #fff;
+  min-height: 230px;
+      border: 2px dashed #fff;
       border-radius: 10px;
     width: 480px;
 }
+
 .dz-message {
-  height: 380px;
+    font-size: 24px;
+    width: 100%;
+    margin: 1em 0;
+    height: 380px;
 }
+
 .dropzone-content-custom {
   display: flex;
       justify-content: center;
@@ -239,10 +255,4 @@ justify-content: center !important;
       flex-direction: column;
       width: 490px;
 
-}
-.dz-message h5 {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 350px;
 }

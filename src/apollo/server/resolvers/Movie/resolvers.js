@@ -2,6 +2,7 @@ import { combineResolvers } from "graphql-resolvers"
 import models from "../../models"
 import { CustomError } from "../../utils/customError"
 import { GENERAL_ERROR, MOVIE_ERROR } from "../../utils/errorMessages"
+import { fileUpload } from "../../utils/fileUpload"
 import { isAuthenticated } from "../Common/resolvers"
 
 export const resolvers = {
@@ -14,7 +15,8 @@ export const resolvers = {
             page: args.page,
             limit: args.limit,
             sort: { year: -1 },
-            populate: "createdBy"
+            populate: "createdBy",
+            lean: true
           },
         ).then((res) => {
           resolve({ count: res?.totalDocs || 0, data: res?.docs || [] });
@@ -26,11 +28,11 @@ export const resolvers = {
 
     getMovie: combineResolvers(isAuthenticated, async (root, { id }, { user }) => {
       try {
-        const movie = await models.Movie.findOne({ _id: id, isDeleted: false })
+        const movie = await models.Movie.findOne({ _id: id, isDeleted: false }).lean()
         if (!movie) {
           throw new CustomError(MOVIE_ERROR.NOT_FOUND, 400)
         }
-        return userData
+        return movie
       } catch (e) {
         throw new CustomError(e.message || GENERAL_ERROR.UNKNOWN, e.code || 500)
       }
@@ -44,6 +46,10 @@ export const resolvers = {
         if (movie) {
           throw new CustomError(MOVIE_ERROR.MOVIE_EXIST, 400)
         } else {
+          if (input?.poster && input?.poster?.search(";base64,") !== -1) {
+            input.poster = await fileUpload(input?.poster);
+          }
+
           let result = await models.Movie.create({
             ...input,
             createdBy: user._id,
@@ -75,6 +81,11 @@ export const resolvers = {
             throw new CustomError(MOVIE_ERROR.MOVIE_EXIST, 400)
           }
         }
+
+        if (input?.poster && input?.poster?.search(";base64,") !== -1) {
+          input.poster = await fileUpload(input?.poster);
+        }
+
 
         delete input?._id
         const result = await models.Movie.findByIdAndUpdate(movie?._id, input, { new: true }).lean().exec()

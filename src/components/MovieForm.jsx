@@ -1,7 +1,7 @@
 'use client'
 
-import React, { useEffect, useState } from 'react';
-import { Button, Form, Input, FormFeedback } from 'reactstrap'
+import React, { useState, useEffect } from 'react';
+import { Input, FormFeedback, Spinner } from 'reactstrap'
 import { useRouter } from 'next/navigation';
 import { useMutation } from '@apollo/client';
 import { object, string, number } from "yup";
@@ -10,12 +10,22 @@ import { CREATE_MOVIE, UPDATE_MOVIE } from '@/apollo/client/graphql/mutation/mov
 import { FormValidationMessages } from '@/constants/form-const';
 import toast from 'react-hot-toast'
 import DropZone from 'react-dropzone'
+import { XCircle, Download } from 'react-feather';
+
+const allowedExtensionsImage = [".jpg", ".JPG", ".jpeg", ".JPEG", ".png", ".PNG", ".gif", ".GIF", ".tif", ".TIF", ".tiff", ".TIFF", ".heic", ".HEIC", ".webp", ".WEBP"];
 
 export default function MovieForm({ operation, editData }) {
 
   const [loading, setLoading] = useState(false)
-  const [selectedFiles, setSelectedFiles] = useState([]);
-  const [images, setImages] = useState([])
+  const [selectedFile, setSelectedFile] = useState("");
+  const [image, setImage] = useState(editData?.poster || "");
+
+  useEffect(() => {
+    if (operation === "edit" && editData?.poster) {
+      setImage(editData?.poster)
+    }
+  }, [operation, editData])
+
   const router = useRouter()
 
   const schema = object().shape({
@@ -46,6 +56,7 @@ export default function MovieForm({ operation, editData }) {
         }),
         title: values.title,
         year: values.year,
+        poster: selectedFile ? selectedFile : editData?.poster || ""
       };
 
 
@@ -63,10 +74,21 @@ export default function MovieForm({ operation, editData }) {
       }).catch(error => {
         toast.error(error.message)
       })
-        .finally(() => setLoading(false))
+        .finally(() => {
+          setLoading(false)
+          setSelectedFile('')
+          setImage('')
+        })
     }
   });
 
+  const handleCancel = (e) => {
+    e.preventDefault()
+    validation.resetForm()
+    setSelectedFile('')
+    setImage('')
+    router.push('/movies')
+  }
 
   return (
     <div className="create-movie background-screen position-relative">
@@ -74,47 +96,57 @@ export default function MovieForm({ operation, editData }) {
         <p className="big-title fs-48 text-start">{operation === "edit" ? "Edit" : "Create a new movie"}</p>
         <div className="drop-img-wrap row">
           <div className="col-xl-5 col-lg-6 col-12">
-            {/* <div className="drop-img-col">dsds</div> */}
-            <DropZone
-              accept={{
-                'image/*': ['.png', '.jpg', '.jpeg', '.gif', '.webp']
-              }}
-              multiple={false}
-              disabled={selectedFiles?.length}
-              onDrop={(acceptedFiles) => {
-                const imageFiles = acceptedFiles.filter(file => file.type.startsWith('image/'));
-                const newFiles = imageFiles.map(file => Object.assign(file))
-                setSelectedFiles([...selectedFiles, ...newFiles].map(f => f))
-              }}
-            >
-              {({ getRootProps, getInputProps }) => (
-                <div className="dropzone dz-clickable cursor-pointer">
-                  <div
-                    className="dz-message needsclick"
-                    {...getRootProps()}
-                  >
-                    <div className="mb-3 position-absolute dropzone-content-custom">
-                      {/* <svg className="mb-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <g clip-path="url(#clip0_3_346)">
-                          <path d="M18 15V18H6V15H4V18C4 19.1 4.9 20 6 20H18C19.1 20 20 19.1 20 18V15H18ZM17 11L15.59 9.59L13 12.17V4H11V12.17L8.41 9.59L7 11L12 16L17 11Z" fill="white" />
-                        </g>
-                        <defs>
-                          <clipPath id="clip0_3_346">
-                            <rect width="24" height="24" fill="white" />
-                          </clipPath>
-                        </defs>
-                      </svg> */}
-                      {/* <i className="display-4 text-muted ri-upload-cloud-2-fill" /> */}
-                      <h5>Drop an Image here</h5>
+            {(selectedFile || image) ?
+              <div className="drop-img-col text-white position-relative">
+                <div className="cursor-pointer x-circle position-absolute">
+                  <XCircle size={32} onClick={() => { setSelectedFile(''); setImage('') }} />
+                </div>
+                <div className="dropzone-img-wrap">
+                  <img src={selectedFile ? selectedFile : image ? `/uploads/${image}` : "/assets/Images/movie-list-img.png"} alt="err"
+                    className="w-100 img-fluid object-fit-cover" />
+                </div>
+              </div>
+              :
+              <DropZone
+                accept={{
+                  'image/*': allowedExtensionsImage
+                }}
+                multiple={false}
+                disabled={selectedFile ? true : false}
+                onDrop={(acceptedFiles) => {
+                  const imageFiles = acceptedFiles.filter(file => file.type.startsWith('image/'));
+                  if (imageFiles?.length) {
+                    const file = imageFiles[0];
+
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                      const base64String = reader.result;
+                      setSelectedFile(base64String)
+                    };
+
+                    reader.readAsDataURL(file);
+                  }
+                }}
+              >
+                {({ getRootProps, getInputProps }) => (
+                  <div className="dropzone dz-clickable cursor-pointer">
+                    <div
+                      className="dz-message needsclick"
+                      {...getRootProps()}
+                    >
+                      <div className="mb-3 position-absolute dropzone-content-custom">
+                        <Download />
+                        <h5 className="mt-3">Drop an Image here</h5>
+                      </div>
                     </div>
                   </div>
-                </div>
-              )}
-            </DropZone>
+                )}
+              </DropZone>
+            }
           </div>
           <div className="col-xl-7 col-lg-6 col-12 ">
             <div className="drop-img-content">
-              <div className="mt-40 w-362">
+              <div className="w-362">
                 <Input
                   placeholder="Title"
                   type="text"
@@ -150,10 +182,12 @@ export default function MovieForm({ operation, editData }) {
               </div>
               <div className="w-100 d-flex mt-64">
                 <div>
-                  <button className="cancel-btn" onClick={() => validation.resetForm()}>Cancel</button>
+                  <button type="reset" className="cancel-btn" onClick={(e) => handleCancel(e)}>Cancel</button>
                 </div>
                 <div>
-                  <button className="green-btn" onClick={() => validation.handleSubmit()}>Submit</button>
+                  <button type="submit" className="green-btn" onClick={() => validation.handleSubmit()} disabled={loading}>
+                    {loading ? (<><Spinner size="sm" className="me-2" />Loading...</>) : "Submit"}
+                  </button>
                 </div>
               </div>
             </div>

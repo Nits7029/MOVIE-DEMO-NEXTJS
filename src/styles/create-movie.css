@@ -1,7 +1,7 @@
 .create-movie {
   padding: 120px 0 0 0;
 }
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .create-movie {
     padding: 30px 20px 0 20px;
   }
@@ -9,15 +9,17 @@
 .create-movie .drop-img-wrap {
   padding: 120px 0 0 0;
 }
-@media (max-width: 768px) {
+
+@media (max-width: 992px) {
   .create-movie .drop-img-wrap {
     padding: 30px 0 0 0;
   }
 }
 .create-movie .drop-img-col {
-  width: 530px;
-  height: 100%;
-  background-color: #224957;
+    width: 100%;
+    max-width: 473px;
+    height: 494px;
+    background-color: #224957;
 }
 @media (max-width: 1024px) {
   .create-movie .drop-img-col {
@@ -28,7 +30,7 @@
 @media (max-width: 768px) {
   .create-movie .drop-img-col {
     width: 100%;
-    height: 300px;
+    height: 380px;
   }
 }
 .create-movie .bg-input-box {
@@ -40,4 +42,9 @@
 }
 .create-movie .cancel-btn {
   width: 167px !important;
+}
+
+.x-circle {
+  top: -16px;
+  left: -12px;
 }

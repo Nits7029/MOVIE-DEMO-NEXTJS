@@ -1,9 +1,10 @@
 "use client";
 
+import React, { useLayoutEffect } from 'react'
+import { useRouter, redirect } from 'next/navigation';
 import { Montserrat } from 'next/font/google'
 import 'bootstrap/dist/css/bootstrap.css'
-import './globals.css'
-// import '../../styles/signin.scss'
+import '@/styles/globals.css'
 import { ApolloProvider } from '@apollo/client'
 import { Toaster } from 'react-hot-toast';
 import client from '@/apollo/client/client'
@@ -17,6 +18,21 @@ const montserrat = Montserrat({
 
 
 export default function RootLayout({ children }) {
+  const router = useRouter();
+  const publicUrl = ["/signin"];
+
+
+  useLayoutEffect(() => {
+    setTimeout(() => {
+      const token = typeof window !== "undefined" && localStorage.getItem("token");
+      const isPublic = publicUrl.includes(typeof window !== "undefined" && window.location.pathname);
+      if (isPublic && token) {
+        router.push("/movies");
+      } else if (!isPublic && !token) {
+        router.push("/signin");
+      }
+    }, 100);
+  }, [router]);
 
   return (
     <html lang="en">
